@@ -7,9 +7,8 @@ using System.Web.UI.WebControls;
 
 namespace Administracion_web
 {
-    public partial class Carrito : System.Web.UI.Page
+    public partial class detalleArticulo : System.Web.UI.Page
     {
-        public string Id { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
 
