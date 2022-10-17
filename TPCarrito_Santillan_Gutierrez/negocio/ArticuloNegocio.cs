@@ -128,6 +128,73 @@ namespace negocio
                 throw ex;
             }
         }
+
+        public List<Articulo> listarPorParametro(int id)
+        {
+
+            {
+                List<Articulo> lista = new List<Articulo>();
+                SqlConnection conexion = new SqlConnection();
+                SqlCommand comando = new SqlCommand();
+                SqlDataReader lector;
+                try
+                {
+                    conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_DB; integrated security = true";
+                    comando.CommandType = System.Data.CommandType.Text;
+                    comando.CommandText = "SELECT A.Id,A.CODIGO, A.Nombre,A.Descripcion,M.Descripcion AS Marca,C.Descripcion AS TIPO,A.ImagenUrl, A.Precio, A.IdCategoria, A.IdMarca FROM ARTICULOS A LEFT JOIN MARCAS M ON M.ID= A.IDMARCA LEFT JOIN CATEGORIAS C ON C.ID= A.IdCategoria where a.Id="+id;
+                    comando.Connection = conexion;
+                    conexion.Open();
+
+                    lector = comando.ExecuteReader();
+                    while (lector.Read())
+                    {
+
+                        //CODIGO, NOMBRE, DESCRIPCION, IMAGEN,CATEGORIA, MARCA Y PRECIO PERMITEN NULOS
+                        // CATEGORIA Y MARCA NO ES POSIBLE QUE SE CARGUEN DE MANERA NULA
+                        Articulo art = new Articulo();
+                        art.Id = (int)lector["Id"];
+                        if (!(lector["CODIGO"] is DBNull))
+                            art.Codigo = (string)lector["CODIGO"];
+                        if (!(lector["NOMBRE"] is DBNull))
+                            art.Nombre = (string)lector["NOMBRE"];
+                        if (!(lector["Descripcion"] is DBNull))
+                            art.Descripcion = (string)lector["Descripcion"];
+                        if (!(lector["ImagenUrl"] is DBNull))
+                            art.ImagenUrl = (string)lector["ImagenUrl"];
+                        if (!(lector["Precio"] is DBNull))
+                            art.Precio = (decimal)lector["Precio"];
+
+                        art.Marca = new Marca();
+                        art.Marca.Id = (int)lector["IdMarca"];
+                        art.Marca.NombreMarca = (string)lector["Marca"];
+
+
+                        art.Categoria = new Categoria();
+                        art.Categoria.Id = (int)lector["IdCategoria"];
+                        //SI EL TIPO DE ARTICULO NO ES NULO LO LEE
+                        if (!(lector["TIPO"] is DBNull))
+                            art.Categoria.Tipo = (string)lector["TIPO"];
+
+
+
+                        lista.Add(art);
+                    }
+
+                    //conexion.Close();
+                    return lista;
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+                finally
+                {
+                    conexion.Close();
+                }
+
+            }
+        }
         public void agregar(Articulo articuloNuevo) 
         {
 

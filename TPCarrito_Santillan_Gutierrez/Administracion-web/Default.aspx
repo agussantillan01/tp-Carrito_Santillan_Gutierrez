@@ -6,23 +6,7 @@
     <h1>DESDE HOME!</h1>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        <%--<%
-        foreach (dominio.Articulo item in ListaArticulos)
-        {%>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="<%: item.ImagenUrl %>" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title"><%: item.Nombre%> </h5>
-                        <p class="card-text"><%: item.Descripcion %></p>
-                        <a href="detalleArticulo.aspx?Id=<%: item.Id%>">Ver Detalle</a>
-                    </div>
-                </div>
-            </div>
-        <%}
-        %>--%>
-
-        <asp:Repeater runat="server" id="repRepetidor">
+         <asp:Repeater runat="server" id="repRepetidor">
             <itemtemplate>
                 <div class="col">
                     <div class="card h-100">
