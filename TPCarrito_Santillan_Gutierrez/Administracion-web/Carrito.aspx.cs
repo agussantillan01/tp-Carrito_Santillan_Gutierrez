@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,10 +10,14 @@ namespace Administracion_web
 {
     public partial class Carrito : System.Web.UI.Page
     {
-        public string Id { get; set; }
-        protected void Page_Load(object sender, EventArgs e)
-        {
 
-        }
+
+        public string Id { get; set; }
+
+       
+       
     }
+         
+    
+
 }

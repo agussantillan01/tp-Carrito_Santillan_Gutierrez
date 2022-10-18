@@ -15,22 +15,40 @@ namespace Administracion_web
         public List<Articulo> ListaArticulos { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            ListaArticulos = negocio.listarConSP();
 
+            if (Session["ListaArticulos"] == null)
+            {     
+            ArticuloNegocio negocio = new ArticuloNegocio();
+                Session.Add("ListaArticulos", negocio.listarConSP());
+                //    ListaArticulos = negocio.listarConSP();
+                }
+         
+         
+                
             if (!IsPostBack)
             {
-                repRepetidor.DataSource = ListaArticulos;
+                repRepetidor.DataSource = Session["ListaArticulos"];
                 repRepetidor.DataBind();
             }
+            
+                        if (Request.QueryString["Id"] != null)
+                        {
+                            int Id = int.Parse(Request.QueryString["Id"].ToString());
+                            List<Articulo> temporal = (List<Articulo>)Session("listaCarrito");
+                            Articulo seleccionado = temporal.Find(x => x.Id == Id);
+                //aca puedo usar lo q traje
+                // PONER UNA CAJA  y ... =seleccionado.Id;
+                // PONER UNA CAJA  y ... =seleccionado. algo ;
 
+
+
+            }
 
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            string valor = ((Button)sender).CommandArgument;
-
+      //  var Id repRepetidor.SelectedDataKey.Value.ToString();
 
         }
     }
