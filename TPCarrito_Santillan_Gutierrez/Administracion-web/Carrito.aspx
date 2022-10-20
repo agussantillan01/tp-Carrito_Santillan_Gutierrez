@@ -17,7 +17,7 @@
                        <asp:BoundField <h5 ><%#Eval("Nombre")%> </h5>/>
                            <asp:BoundField   <p><%#Eval("Descripcion") %></p>/>
                          <asp:BoundField   <p><%#Eval("Precio") %></p>/>
-                         <asp:BoundField   <p><%#Eval("Precio") %></p>/>
+                     <%--    <asp:BoundField   <p><%#Eval("Precio") %></p>/>--%>
 
 
                             <a href="detalleArticulo.aspx?Id=<%#Eval("Id")%>">Ver Detalle</a>

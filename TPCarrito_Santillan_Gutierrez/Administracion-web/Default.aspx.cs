@@ -48,14 +48,14 @@ namespace Administracion_web
                 int id = int.Parse(valor.ToString());
                 List<Articulo> temporal = (List<Articulo>)Session["listaCarrito"];
               Articulo seleccionado = temporal.Find(x => x.Id == id);
-                if ( seleccionado != null )
-                {
+        //         if ( seleccionado != null )
+        //       {
                     temporal.Add(seleccionado);
-                } else
-                {
+        //        } else
+        //        {
+        //          aca tendiramos que sumar la cantidad 
 
-
-                }
+        //        }
 
 
             }
