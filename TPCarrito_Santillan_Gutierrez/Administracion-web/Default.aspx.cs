@@ -46,15 +46,19 @@ namespace Administracion_web
             if ( valor != null)
             {
                 int id = int.Parse(valor.ToString());
-                List<Articulo> temporal = (List<Articulo>)Session["listaArticulos"];
+                List<Articulo> temporal = (List<Articulo>)Session["listaCarrito"];
               Articulo seleccionado = temporal.Find(x => x.Id == id);
-                temporal.Add(seleccionado);
+                if ( seleccionado != null )
+                {
+                    temporal.Add(seleccionado);
+                } else
+                {
+
+
+                }
 
 
             }
-
-
-
 
         }
     }

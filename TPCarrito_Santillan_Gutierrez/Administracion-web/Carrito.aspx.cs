@@ -17,11 +17,24 @@ namespace Administracion_web
         {
             ///public string Id { get; set; }
 
-      /*      ArticuloNegocio carrito = new ArticuloNegocio();
-            dgvCarrito.DataSource = carrito.listar();
-            dgvCarrito.DataBind();
-      */
-           
+       
+
+            if (Session["ListaCarrito"] == null)
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                
+                Session.Add("ListaCarrito", negocio.listarConSP());
+                //    ListaArticulos = negocio.listarConSP();
+            }
+
+
+
+            if (!IsPostBack)
+            {
+                dgvCarrito.DataSource = Session["ListaCarrito"];
+                dgvCarrito.DataBind();
+            }
+
 
 
 
