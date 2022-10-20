@@ -12,7 +12,7 @@ namespace Administracion_web
 {
     public partial class Default : System.Web.UI.Page
     {
-        public List<Articulo> ListaArticulos { get; set; }
+      ///  public List<Articulo> ListaArticulos { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -30,25 +30,31 @@ namespace Administracion_web
                 repRepetidor.DataSource = Session["ListaArticulos"];
                 repRepetidor.DataBind();
             }
-            
-                        if (Request.QueryString["Id"] != null)
-                        {
-                            int Id = int.Parse(Request.QueryString["Id"].ToString());
-                            List<Articulo> temporal = (List<Articulo>)Session("listaCarrito");
-                            Articulo seleccionado = temporal.Find(x => x.Id == Id);
-                //aca puedo usar lo q traje
-                // PONER UNA CAJA  y ... =seleccionado.Id;
-                // PONER UNA CAJA  y ... =seleccionado. algo ;
+  
 
+        }
+
+    
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+                
+
+            string valor = ((Button)sender).CommandArgument;
+
+
+            if ( valor != null)
+            {
+                int id = int.Parse(valor.ToString());
+                List<Articulo> temporal = (List<Articulo>)Session["listaArticulos"];
+              Articulo seleccionado = temporal.Find(x => x.Id == id);
+                temporal.Add(seleccionado);
 
 
             }
 
-        }
 
-        protected void btnAgregar_Click(object sender, EventArgs e)
-        {
-      //  var Id repRepetidor.SelectedDataKey.Value.ToString();
+
 
         }
     }

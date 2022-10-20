@@ -2,11 +2,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" dataKeyNames="id">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" >
     <h1>DESDE HOME!</h1>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
-         <asp:Repeater runat="server" id="repRepetidor" >
+        <asp:Repeater runat="server" id="repRepetidor"  >
             <itemtemplate>
                 <div class="col">
                     <div class="card h-100">
@@ -16,7 +16,7 @@
                             <p class="card-text"><%#Eval("Descripcion") %></p>
 
                             <a href="detalleArticulo.aspx?Id=<%#Eval("Id")%>">Ver Detalle</a>
-                            <asp:Button Text="Agregar" cssClass="btn btn-primary" ID="btnAgregar" runat="server" CommandArgument='<%#Eval("Id")%>' CommandName="ArticuloID" onclick="btnAgregar_Click"/>
+                            <asp:Button Text="Agregar" cssClass="btn btn-primary" ID="btnAgregar" runat="server"  CommandArgument='<%#Eval("Id")%>' CommandName="ArticuloID" onclick="btnAgregar_Click"/>
                             </div>
                     </div>
                 </div>

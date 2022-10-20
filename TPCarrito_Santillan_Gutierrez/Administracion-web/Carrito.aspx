@@ -7,14 +7,17 @@
          <asp:Repeater runat="server" id="dgvCarrito" >
             <itemtemplate>
                 <div class="col">
-                    <div class="card h-100">
-                            <h5 ><%#Eval("Nombre")%> </h5>
+                    <asp:GridView runat="server" ID="dgvCarrito" AutoGenerateColumns="false"></asp:GridView>
+                    <columns>
+                      <asp:BoundField HeaderText="Nombre"  DataField="Nombre"/>
+                        <asp:BoundField HeaderText="Descripcion"  DataField="Descripcion"/>
+                       <h5 ><%#Eval("Nombre")%> </h5>
                             <p><%#Eval("Descripcion") %></p>
 
                             <a href="detalleArticulo.aspx?Id=<%#Eval("Id")%>">Ver Detalle</a>
                     
-                            </div>
-                    </div>
+                   
+                    </columns>
                 </div>
             </itemtemplate>
         </asp:Repeater>

@@ -18,4 +18,6 @@ namespace dominio
         public Categoria Categoria { get; set; }
 
     }
+
+
 }
