@@ -13,30 +13,46 @@ namespace Administracion_web
     public partial class Carrito : System.Web.UI.Page
     {
 
-       protected void Page_Load(object sender, EventArgs e)
+        public List<itemCarrito> ListaEnCarrito;
+
+
+        protected void Page_Load(object sender, EventArgs e)
         {
-            ///public string Id { get; set; }
 
-       
+            ListaEnCarrito = (List<itemCarrito>)Session["listaEnCarro"];
 
-            if (Session["ListaCarrito"] == null)
-            {
-                ArticuloNegocio negocio = new ArticuloNegocio();
-                
-                Session.Add("ListaCarrito", negocio.listarConSP());
-                //    ListaArticulos = negocio.listarConSP();
-            }
+
+
+            if (ListaEnCarrito == null)
+                ListaEnCarrito = new List<itemCarrito>();
+
 
 
 
             if (!IsPostBack)
             {
-                dgvCarrito.DataSource = Session["ListaCarrito"];
-                dgvCarrito.DataBind();
+                if (Request.QueryString["ID"] != null)
+                {
+                    if (ListaEnCarrito.Find(x => x.item.Id.ToString() == Request.QueryString["Id"]) == null)
+                    {
+                        List<Articulo> listadoOriginal = (List<Articulo>)Session["listadoProductos"];
+                        itemCarrito aux = new itemCarrito();
+
+                        aux.item = listadoOriginal.Find(x => x.Id.ToString() == Request.QueryString["Id"]);
+                        aux.subtotal = aux.item.Precio;
+                        aux.id = aux.item.Id;
+
+                        ListaEnCarrito.Add(aux);
+                    }
+
+
+                }
+                repetidor.DataSource = ListaEnCarrito;
+                repetidor.DataBind();
             }
 
 
-
+            Session.Add("listaEnCarro", ListaEnCarrito);
 
         }
     }

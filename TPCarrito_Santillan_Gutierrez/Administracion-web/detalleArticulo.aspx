@@ -5,25 +5,16 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-        <%foreach (dominio.Articulo art in ListaArticulos)
-            { %>
-
-             <div class="card" style="width: 18rem; text-align:center;">
-                <img src="<%:art.ImagenUrl%>" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <hr />
-                    <h5 class="card-title"><%:art.Nombre%></h5>
-                    <p class="card-text"><%:art.Descripcion%></p>
-                    <p class="card-text">Marca:  <%:art.Marca.NombreMarca%></p>
-                    <%if (art.Categoria.Tipo != null)
-                    {%>
-                    <p class="card-text">tipo de articulo: <%:art.Categoria.Tipo%></p>
-                    <%}%>
-                    <p class="card-text">$  <%:art.Precio.ToString()%></p>
-                </div>
-            </div>
-
-
-        <% } %>
+<div class="card" style="width: 18rem;">
+        <img src="<% = seleccionado.ImagenUrl %>" class="card-img-top" alt="..." onerror="this.src='https://assets.cdn-shop.com/mi-arte3-es/assets/img/backgrounds/placeholder-8b83e412a5.svg';">
+        <div class="card-body">
+            <h5><% = seleccionado.Nombre %></h5>
+            <p>Descripcion: <% = seleccionado.Descripcion %></p>
+            <p>Categoria: <% = seleccionado.Categoria %></p>
+            <p>Marca: <% = seleccionado.Marca %></p>
+            <p>Precio $: <% = seleccionado.Precio %></p>
+            <a class="btn btn-primary" href="Carrito.aspx?id=<% = seleccionado.Id%>" role="button">Agregar Carrito</a>
+        </div>
+    </div>
 
 </asp:Content>
