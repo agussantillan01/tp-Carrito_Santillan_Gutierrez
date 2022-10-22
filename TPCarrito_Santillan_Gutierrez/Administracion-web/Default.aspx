@@ -5,22 +5,23 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" >
     <h1>DESDE HOME!</h1>
 
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <asp:Repeater runat="server" id="repRepetidor"  >
-            <itemtemplate>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="<%#Eval("ImagenUrl") %>" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><%#Eval("Nombre")%> </h5>
-                            <p class="card-text"><%#Eval("Descripcion") %></p>
+ <div class="row">
+<% foreach (dominio.Articulo item in ListaArticulos)
+   {%>
 
-                            <a href="detalleArticulo.aspx?Id=<%#Eval("Id")%>">Ver Detalle</a>
-                            <asp:Button Text="Agregar" cssClass="btn btn-primary" ID="btnAgregar" runat="server"  CommandArgument='<%#Eval("Id")%>' CommandName="ArticuloID" onclick="btnAgregar_Click"/>
-                            </div>
-                    </div>
-                </div>
-            </itemtemplate>
-        </asp:Repeater>
-    </div>
+     <div class="col">
+       <div class="card h-100">
+         <img src="<% = item.ImagenUrl %>" class="card-img-top" alt="..." onerror="this.src='https://assets.cdn-shop.com/mi-arte3-es/assets/img/backgrounds/placeholder-8b83e412a5.svg';">
+         <div class="card-body">
+          <h5 class="card-title"><% = item.Nombre %></h5>
+          <p class="card-text"><%= item.Descripcion %></p>
+          <p class="card-text"><%= item.Precio %></p>
+          <a href="DetalleArticulo.aspx?id=<% = item.Id %>" class="btn btn-primary">Ver Detalle</a>
+          </div>
+         </div>
+       </div>
+
+
+ <%} %>
+ </div>
 </asp:Content>
