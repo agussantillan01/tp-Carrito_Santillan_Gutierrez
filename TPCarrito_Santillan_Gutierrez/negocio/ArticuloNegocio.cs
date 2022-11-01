@@ -76,6 +76,53 @@ namespace negocio
             
         }
 
+        public List<Articulo> listarConParametros(string consulta)
+        {
+            List<Articulo> lista = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("select A.ID,A.Codigo,A.Nombre, A.Descripcion Descripcion,M.Descripcion as Marca,C.Descripcion as Categoria ,A.ImagenUrl,A.Precio,M.ID as IDMarca,C.ID as IDCategoria from Articulos A, Marcas M, Categorias C where a.IDMarca = m.id and a.IDCategoria = c.ID AND " + consulta);
+
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+                    aux.Id = (int)datos.Lector["ID"];
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+                    aux.Precio = decimal.Parse(datos.Lector["Precio"].ToString());
+
+                    aux.Marca = new Marca();
+                    aux.Marca.NombreMarca= ((string)datos.Lector["Marca"]);
+                    aux.Marca.Id = ((int)datos.Lector["IDMarca"]);
+
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.Tipo= (string)datos.Lector["Categoria"];
+                    aux.Categoria.Id = ((int)datos.Lector["IDCategoria"]);
+
+                    
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+
         public List<Articulo> listarConSP()
         {
             List<Articulo> lista = new List<Articulo>();

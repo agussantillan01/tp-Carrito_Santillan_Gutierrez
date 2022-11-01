@@ -5,6 +5,15 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" >
     <h1>DESDE HOME!</h1>
 
+    <div class="input-group input-group-sm mb-1" style="padding-top: 2rem; padding-bottom: 2rem; max-width:100%; margin-left:30%;margin-right:30% ">
+                  <div class="input-group-prepend">
+                        <asp:TextBox runat="server" ID="Buscador" class="form-control"/>
+                    <asp:Button Text="Search" ID="btnBuscar" OnClick="btnBuscar_Click" runat="server" />
+                  </div>
+                </div>
+
+
+
  <div class="row">
 <% foreach (dominio.Articulo item in ListaArticulos)
    {%>

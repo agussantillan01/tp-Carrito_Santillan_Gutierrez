@@ -22,5 +22,40 @@ namespace Administracion_web
 
         }
 
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
+            try
+            {
+                if (Buscador.Text == "")
+                {
+                    ListaArticulos = negocio.listar();
+
+                }
+                else
+                {
+                    ListaArticulos = negocio.listarConParametros(armaConsultaFiltro());
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private string armaConsultaFiltro()
+        {
+            string consulta = "";
+            if (Buscador.Text != "")
+            {
+                consulta += "A.Nombre LIKE '%" + Buscador.Text.ToString() + "%'";
+
+            }
+
+
+            return consulta;
+        }
     }
 }
