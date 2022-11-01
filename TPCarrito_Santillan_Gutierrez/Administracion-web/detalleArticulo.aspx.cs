@@ -25,8 +25,6 @@ namespace Administracion_web
                 seleccionado = listado.Find(x => x.Id == id);
 
 
-
-
             }
 
 

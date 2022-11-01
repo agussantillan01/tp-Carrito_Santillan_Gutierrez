@@ -19,10 +19,15 @@
                     <td>
                         <asp:Label ID="lblSubTotal" runat="server" Text='<%#Eval("subtotal") %>'></asp:Label>
                     </td>
+                    <td>
+                        <asp:Button Id="btnCantidad" type="text" Text='<%#Eval("cantidad") %>' runat="server" autoPostback="true" CommandArgument='<%#Eval("Id") %>'/>
+                    </td>
                 </tr>
 
             </ItemTemplate>
         </asp:Repeater>
 
     </table>
+
+    <asp:Label Text="" ID="lblPrecioTotal" runat="server" />
 </asp:Content>
