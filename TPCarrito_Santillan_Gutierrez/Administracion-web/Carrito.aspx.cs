@@ -37,19 +37,14 @@ namespace Administracion_web
             {
                 if (Request.QueryString["Id"] != null)
                 {
-                    if (ListaEnCarrito.Find(x => x.item.Id.ToString() == Request.QueryString["Id"]) == null)
-                    {
-                        List<Articulo> listadoOriginal = (List<Articulo>)Session["listadoProductos"];
-                        itemCarrito aux = new itemCarrito();
+                    List<Articulo> listadoOriginal = (List<Articulo>)Session["listadoProductos"];
+                    itemCarrito aux = new itemCarrito();
+
                         if (aux.cantidad == 0)
                         {
-                            aux.cantidad = 1;
+                            aux.cantidad +=1;
                         }
-                        else
-                        {
-                            aux.cantidad++;
-                        }
- 
+
                         aux.item = listadoOriginal.Find(x => x.Id.ToString() == Request.QueryString["Id"]);
                         aux.subtotal = aux.cantidad * aux.item.Precio;
                         aux.id = aux.item.Id;
@@ -59,7 +54,10 @@ namespace Administracion_web
                         
 
                         ListaEnCarrito.Add(aux);
-                    }
+                    
+                  
+                    
+
                     carrito.listado = ListaEnCarrito;
 
                 }
